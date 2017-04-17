@@ -1,0 +1,60 @@
+<div class="columns">
+    <h3>Welcome to Toyo!</h3>
+    <div class="chat-container">
+        <div class="block">
+            <p class="welcome-box">
+                Toyo is the most instant-aneous messaging app ever!
+            </p>
+        </div>
+        <div class="block">
+            <p class="welcome-box">
+                Create and join chatrooms right from the address bar.<br/> Just append '/myAwesomeChatroom' at the end and you are ready!
+            </p>
+        </div>
+        <div class="block">
+            <p class="welcome-box">
+                Share the link with your mates to add them to the chatroom.
+            </p>
+        </div>
+
+    </div>
+
+    <template [ngIf]='!name'>
+        <br>
+        <br>
+        <h3>Login to begin.</h3>
+        <div class="chat-container">
+            <button class="login-button" (click)="login()" *ngIf="!name">Login With Facebook</button>
+
+        </div>
+    </template>
+
+    <template [ngIf]='name'>
+        <br>
+        <br>
+        <h3>You are logged in.</h3>
+        <div class="chat-container">
+            <div class="block">
+                <p class="welcome-box">
+                    Enter a chatroom name below to join the chatroom.<br/> You will be joining as <span class="color">{{this.name.facebook.displayName}}</span>.
+                </p>
+            </div>
+            
+            <form [formGroup]="joinForm">
+                <input formControlName="chatroom_name"  (keyup.enter)="join()" class="chatroom-name" placeholder=""/>
+                <a class="chatroom-join" type="submit" (click)="join()" style="height: 40px;">Join</a>
+            </form>
+
+        </div>
+    </template>
+    <br><br>
+
+    <div class="chat-container message-box logout-container">
+        <a *ngIf="name" (click)="logout();" onclick="location.reload()">
+            Logout
+        </a>
+    </div>
+</div>
+
+
+<img class="logo" src="../../assets/images/toyo.png">

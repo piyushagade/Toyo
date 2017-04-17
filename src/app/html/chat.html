@@ -1,0 +1,71 @@
+<template [ngIf]='!name'>
+  <div class="columns">
+      <h3>Welcome to Toyo!</h3>
+      <div class="chat-container">
+          <div class="block">
+              <p class="welcome-box">
+                  Toyo is the most instant-aneous messaging app ever!
+              </p>
+          </div>
+          <div class="block">
+              <p class="welcome-box">
+                  Create and join chatrooms right from the address bar.<br/> Just append '/myAwesomeChatroom' at the end and you are ready!
+              </p>
+          </div>
+          <div class="block">
+              <p class="welcome-box">
+                  Share the link with your mates to add them to the chatroom.
+              </p>
+          </div>
+
+      </div>
+
+      <br>
+      <br>
+      <h3>Login to join.</h3>
+      <div class="chat-container">
+          <div class="block">
+              <p class="welcome-box">
+                  To join <span class="color">{{room}}</span> chatroom, please sign in first.
+              </p>
+          </div>
+          <button class="login-button" (click)="login()" *ngIf="!name">Login With Facebook</button>
+
+      </div>
+  </div>
+</template>
+
+<div class="row columns room-container" *ngIf="name">
+  <div class="chat-input">
+    <input type="text" id="message" *ngIf="name" placeholder="type here..." (keyup.enter)="chatSend($event.target.value)" [(ngModel)]="message" />
+    <span class="emoji-menu" style="color:#FFF;"
+      (click)="toggled = !toggled"
+      emojiPickerAnchor
+      [(emojiPickerIf)]="toggled"
+      (emojiPickerSelect)="handleSelection($event)">😄</span>
+  </div>
+
+  <div class="chat-container" *ngFor="let item of items | async | orderBy: '-timestamp'" >      
+    <p class="message-box" [ngClass]="{'message-right': item.name == name.facebook.displayName}">
+        <a href="#">{{item.name}}</a>
+        <markdown class="message">{{item.message | emojify}}</markdown>
+        <span class="timestamp">{{item.timestamp | smartDate}}</span>
+    </p>
+    
+  </div>
+</div>
+
+
+
+<div class="chat-container message-box logout-container">    
+    <a *ngIf="name" (click)="logout();" onclick="location.reload();">
+        Logout
+    </a>
+
+    <a *ngIf="name" routerLink="/">
+        Leave
+    </a>
+</div>
+
+<img class="logo-left" *ngIf="!name" src="../../assets/images/toyo.png">
+
