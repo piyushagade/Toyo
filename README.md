@@ -1,6 +1,6 @@
-<p align="center">(https://raw.githubusercontent.com/piyushagade/Toyo/master/src/assets/images/toyo.png)</p>
+<p align="center">![Toyo](https://raw.githubusercontent.com/piyushagade/Toyo/master/src/assets/images/toyo.png)</p>
 
-# Toyo ![Toyo]
+# Toyo
 
 Demo
 ---
