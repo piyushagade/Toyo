@@ -51,10 +51,32 @@ input#message {
 
 }
 
+
+.chat-container .notification-box {
+    background:#323035;
+    padding: 1.1em;
+    color:white;
+
+    padding-left: 26px;
+    padding-right: 26px;
+    
+    position: relative;
+    /*display: inline-flex;*/
+    /*width: auto;*/
+    word-wrap: break-word; 
+
+    width: 360px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
+
 .chat-container  .message-right{
     position: relative;
     float: right;
-    opacity: .68;
+    opacity: .7;
 }
 
 .chat-container  .message{

@@ -22,9 +22,13 @@ export class ChatComponent {
   objects: FirebaseObjectObservable<any>;
   rooms;
   room: string;
+  noMessages = false;
+  baseURL: string;
 
 
   constructor(public af: AngularFire, private _router: Router) {
+    this.baseURL = 'http://toyo-32ad5.firebase.com/';
+
     this.objects = af.database.object('/rooms', { preserveSnapshot: true });
 
     // retriving snapshot
@@ -36,11 +40,22 @@ export class ChatComponent {
     this.room = _router.url.substr(1);
     // this.objects.update({ [this.room]: ''});
 
+    // get messages in the chatroom
     this.items = af.database.list('/rooms/' + this.room + '/messages', {
         query: {
             limitToLast: 100
         }
     });
+
+    this.items.subscribe((response) => {
+      if (response.length == 0) {
+        this.noMessages = true;
+      }
+      else
+        this.noMessages = false;
+    });
+
+    console.log(this.items);
 
     this.af.auth.subscribe(auth => {
       if(auth) {
@@ -62,8 +77,8 @@ export class ChatComponent {
 
   chatSend(theirMessage: string) {
     let today = new Date();
-    let date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear() + ' ' + today.getHours() + ':' + today.getMinutes() + ' ' + today.getUTCDay();
-    console.log(today.getTime());
+    let date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear() +
+     ' ' + today.getHours() + ':' + today.getMinutes() + ' ' + today.getUTCDay();
 
     this.items.push({ message: theirMessage, name: this.name.facebook.displayName, timestamp: today.getTime()});
     this.message = '';
