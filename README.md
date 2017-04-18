@@ -5,4 +5,4 @@ Toyo is an web chat app that allows making and sharing chatroom extremely easy.
 
 Demo
 ---
-Check out a demo here: [Toyo Chat App](https://piyushagade.xyz/toyo)
+Check out a demo here: [Toyo Chat App](http://piyushagade.xyz/toyo)
